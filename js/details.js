@@ -16,13 +16,22 @@ const retrieveSingleProduct = (id) => {
       if (response.ok) {
         return response.json();
       } else {
-        throw new Error("Fetch error");
+        let errorMessage = "";
+        if (response.status <= 400 || response.status < 500) {
+          errorMessage = response.status + " - Error due to user configuration problem.";
+        } else if (response.status >= 500) {
+          errorMessage = response.status + " - Server error.";
+        }
+        throw new Error(errorMessage);
       }
     })
     .then((product) => {
       getProductDetails(product);
     })
     .catch((err) => {
+      const alertBox = document.querySelector(".alert");
+      alertBox.classList.remove("d-none");
+      alertBox.innerHTML = `<p class="mb-0 text-center">${err}</p>`;
       console.log(err);
     });
 };

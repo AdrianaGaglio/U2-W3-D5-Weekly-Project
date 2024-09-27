@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200">
+  <!-- Curva fluida rappresentante movimento -->
+  <path d="M30,100 Q100,30 150,100 T270,100" fill="none" stroke="#3498db" stroke-width="10"/>
+
+  <!-- Simbolo di elettricità stilizzato -->
+  <path d="M150,50 L130,100 H150 L130,150" fill="#e74c3c"/>
+
+  <!-- Cerchio rappresentante una ruota o un motore elettrico -->
+  <circle cx="230" cy="100" r="40" fill="#2ecc71"/>
+
+  <!-- Linee di energia -->
+  <path d="M60,70 Q100,85 140,70 M60,130 Q100,115 140,130" fill="none" stroke="#f39c12" stroke-width="4"/>
+</svg>

@@ -2,6 +2,8 @@ const endPoint = "https://striveschool-api.herokuapp.com/api/product/";
 const apiKey =
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmY2NmE5Zjc5YzQ1ZjAwMTU2OWI0YzciLCJpYXQiOjE3Mjc0MjUxODMsImV4cCI6MTcyODYzNDc4M30.I3iVctbhWa-taIoDKhrsXb8PAnHrmGOY-BJVaW9_CcM";
 
+const productsArray = [];
+
 const retrieveProducts = () => {
   fetch(endPoint, {
     headers: {
@@ -12,14 +14,23 @@ const retrieveProducts = () => {
       if (response.ok) {
         return response.json();
       } else {
-        throw new Error("Fetch error");
+        let errorMessage = "";
+        if (response.status <= 400 || response.status < 500) {
+          errorMessage = response.status + " - Error due to user configuration problem.";
+        } else if (response.status >= 500) {
+          errorMessage = response.status + " - Server error.";
+        }
+        throw new Error(errorMessage);
       }
     })
     .then((data) => {
       getProducts(data);
-      console.log(data);
+      productsArray.push(...data);
     })
     .catch((err) => {
+      const alertBox = document.querySelector(".alert");
+      alertBox.classList.remove("d-none");
+      alertBox.innerHTML = `<p class="mb-0 text-center">${err}</p>`;
       console.log(err);
     });
 };
@@ -44,15 +55,29 @@ const getProducts = (products) => {
         <div class="card-footer p-0 btn-group border-0 p-1 bg-body">
                 <a href="./details.html?id=${product._id}" class="btn btn-success text-light" title="View details"><i class="bi bi-search"></i></i></a>
                 <a href="#" class="btn btn-primary" title="Add to cart"><i class="bi bi-cart-plus text-light"></i></a>
-                <a href="./backoffice.html?id=${product._id}&operation=modify" class="btn btn-warning" title="Modify product"><i class="bi bi-pencil"></i></a>
-                <a href="./backoffice.html?id=${product._id}&operation=delete" class="btn btn-danger" title="Delete product"><i class="bi bi-trash3"></i></a>
+                <a href="./backoffice.html?id=${
+                  product._id
+                }&operation=modify" class="btn btn-warning text-light" title="Modify product"><i class="bi bi-pencil"></i></a>
+                <a href="./backoffice.html?id=${
+                  product._id
+                }&operation=delete" class="btn btn-danger text-light" title="Delete product"><i class="bi bi-trash3"></i></a>
         </div>
     </div>
     `;
+    // btn add to cart previsto per questioni grafiche e future implementazioni, ma non è funzionante al momento
+
     productsList.appendChild(newCol);
   });
 };
 
 window.addEventListener("load", () => {
   retrieveProducts();
+});
+
+const form = document.querySelector("form");
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const keyword = document.getElementById("search").value.toLowerCase();
+  const searched = productsArray.filter((product) => product.name.toLowerCase().includes(keyword));
+  getProducts(searched);
 });

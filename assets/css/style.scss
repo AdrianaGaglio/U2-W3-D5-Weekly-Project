@@ -21,7 +21,9 @@ $new-font-sizes: (
 
 $font-sizes: map-merge($font-sizes, $new-font-sizes);
 
-$custom-widths: (80, 100, 150, 200, 250, 300);
+// custom classes
+
+$custom-widths: (50, 80, 100, 150, 200, 250, 300);
 
 @each $width in $custom-widths {
   .w-fixed-#{$width} {
@@ -29,7 +31,7 @@ $custom-widths: (80, 100, 150, 200, 250, 300);
   }
 }
 
-$custom-heights: (30, 50, 100, 250);
+$custom-heights: (30, 80, 50, 100, 250);
 
 @each $height in $custom-heights {
   .h-fixed-#{$height} {

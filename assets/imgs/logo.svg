@@ -1,6 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100">
-  <rect x="10" y="30" width="40" height="40" fill="#e74c3c"/>
-  <circle cx="100" cy="50" r="20" fill="#3498db"/>
-  <polygon points="150,30 170,70 130,70" fill="#2ecc71"/>
-  <path d="M10,80 Q100,100 190,80" stroke="#f39c12" stroke-width="6" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200">
+  <!-- Curva fluida rappresentante movimento -->
+  <path d="M50,100 Q100,50 150,100 T250,100" fill="none" stroke="#3498db" stroke-width="8"/>
+
+  <!-- Simbolo di elettricità stilizzato -->
+  <path d="M150,60 L130,100 H150 L130,140" fill="#e74c3c"/>
+
+  <!-- Cerchio rappresentante una ruota o un motore elettrico -->
+  <circle cx="220" cy="100" r="30" fill="#2ecc71"/>
+
+  <!-- Linee di energia -->
+  <path d="M70,80 Q100,90 130,80 M70,120 Q100,110 130,120" fill="none" stroke="#f39c12" stroke-width="3"/>
+
+  <!-- Testo del logo -->
+  <text x="150" y="180" font-family="Arial, sans-serif" font-size="18" fill="#3498db" text-anchor="middle" font-weight="bold">Electric Mobility Shop</text>
 </svg>

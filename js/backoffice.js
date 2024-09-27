@@ -19,6 +19,14 @@ if (prodID) {
     .then((response) => {
       if (response.ok) {
         return response.json();
+      } else {
+        let errorMessage = "";
+        if (response.status <= 400 || response.status < 500) {
+          errorMessage = response.status + " - Error due to user configuration problem.";
+        } else if (response.status >= 500) {
+          errorMessage = response.status + " - Server error.";
+        }
+        throw new Error(errorMessage);
       }
     })
     .then((product) => {
@@ -44,6 +52,9 @@ if (prodID) {
       price.value = product.price;
     })
     .catch((err) => {
+      const alertBox = document.querySelector(".alert");
+      alertBox.classList.remove("d-none");
+      alertBox.innerHTML = `<p class="mb-0 text-center">${err}</p>`;
       console.log(err);
     });
 }
@@ -69,13 +80,23 @@ const createProduct = (product) => {
     }
   })
     .then((response) => {
+      alert("Product correctly created.");
       if (response.ok) {
-        alert("Product correctly created.");
+        return response.json();
       } else {
-        throw new Error("Fetch error!");
+        let errorMessage = "";
+        if (response.status <= 400 || response.status < 500) {
+          errorMessage = response.status + " - Error due to user configuration problem.";
+        } else if (response.status >= 500) {
+          errorMessage = response.status + " - Server error.";
+        }
+        throw new Error(errorMessage);
       }
     })
     .catch((err) => {
+      const alertBox = document.querySelector(".alert");
+      alertBox.classList.remove("d-none");
+      alertBox.innerHTML = `<p class="mb-0 text-center">${err}</p>`;
       console.log(err);
     });
 };
@@ -89,13 +110,23 @@ const deleteProduct = (prodID) => {
     }
   })
     .then((response) => {
+      alert("Product correctly deleted.");
       if (response.ok) {
-        alert("Product correctly deleted.");
+        return response.json();
       } else {
-        throw new Error("Fetch error!");
+        let errorMessage = "";
+        if (response.status <= 400 || response.status < 500) {
+          errorMessage = response.status + " - Error due to user configuration problem.";
+        } else if (response.status >= 500) {
+          errorMessage = response.status + " - Server error.";
+        }
+        throw new Error(errorMessage);
       }
     })
     .catch((err) => {
+      const alertBox = document.querySelector(".alert");
+      alertBox.classList.remove("d-none");
+      alertBox.innerHTML = `<p class="mb-0 text-center">${err}</p>`;
       console.log(err);
     });
 };
@@ -111,13 +142,23 @@ const modifyProduct = (prodID, productObj) => {
     }
   })
     .then((response) => {
+      alert("Product correctly modified.");
       if (response.ok) {
-        alert("Product correctly changed.");
+        return response.json();
       } else {
-        throw new Error("Fetch error!");
+        let errorMessage = "";
+        if (response.status <= 400 || response.status < 500) {
+          errorMessage = response.status + " - Error due to user configuration problem.";
+        } else if (response.status >= 500) {
+          errorMessage = response.status + " - Server error.";
+        }
+        throw new Error(errorMessage);
       }
     })
     .catch((err) => {
+      const alertBox = document.querySelector(".alert");
+      alertBox.classList.remove("d-none");
+      alertBox.innerHTML = `<p class="mb-0 text-center">${err}</p>`;
       console.log(err);
     });
 };
@@ -166,8 +207,10 @@ modifyBtn.addEventListener("click", () => {
   const imageUrl = document.getElementById("imageUrl");
   const price = document.getElementById("price");
   const modifiedProduct = new Product(name.value, description.value, brand.value, imageUrl.value, price.value);
-  // console.log(modifiedProduct);
   modifyProduct(prodID, modifiedProduct);
+  setTimeout(() => {
+    location.replace("./backoffice.html");
+  }, 500);
 });
 
 // reset del form
@@ -185,65 +228,3 @@ resetBtn.addEventListener("click", () => {
     };
   });
 });
-
-const tempArray = [
-  {
-    name: "Skateboard Elettrico Xtreme",
-    description: "Skateboard elettrico con motore potente e autonomia fino a 25 km. Perfetto per il divertimento e la mobilità urbana.",
-    brand: "Xtreme Skate",
-    imageUrl: "https://img.fantaskycdn.com/2bfda609c26d23f81a2fbebab66d8042_1080x.jpg",
-    price: 650.0
-  },
-  {
-    name: "Hoverboard Smart Balance",
-    description: "Hoverboard con sistema di autobilanciamento, luci LED e connessione Bluetooth per musica durante il viaggio.",
-    brand: "SmartRide",
-    imageUrl: "https://i.ebayimg.com/images/g/UAoAAOSwxaRm5pxY/s-l1600.webp",
-    price: 320.0
-  },
-  {
-    name: "Monoruota Elettrico Pro X1",
-    description: "Monoruota elettrico con alta stabilità e capacità di raggiungere velocità fino a 30 km/h. Perfetto per i tragitti veloci in città.",
-    brand: "MonoRider",
-    imageUrl:
-      "https://ae-pic-a1.aliexpress-media.com/kf/A37ba45b6740f4cf6b90eface7ad783d0u/Acquista-5-ottieni-2-gratis-InMotions-V11-monociclo-elettrico-potente-2200w-motor-Peaks-Power-3000wv-consegna.jpeg_.webp",
-    price: 850.0
-  },
-  {
-    name: "Skateboard Elettrico Off-Road",
-    description: "Skateboard elettrico per percorsi accidentati con ruote grandi e ammortizzatori. Ideale per avventure all'aperto.",
-    brand: "Adventure Skates",
-    imageUrl:
-      "https://ae-pic-a1.aliexpress-media.com/kf/Sf473c0922a104f8cba7fb132e9491d12a/1500w-60kph-4-ruote-0km-la-gamma-mph-drive-off-road-buggy-skateboard-elettrico-pi-veloce.jpg_.webp",
-    price: 950.0
-  },
-  {
-    name: "E-Roller Compact Mini",
-    description: "Un roller elettrico compatto e leggero, facile da trasportare e perfetto per brevi spostamenti urbani.",
-    brand: "E-Motion",
-    imageUrl: "https://img.kwcdn.com/product/fancy/7680d92e-5ecb-476c-8d9c-ff2f6312361e.jpg?imageView2/2/w/650/q/50/format/webp",
-    price: 280.0
-  }
-];
-
-// tempArray.forEach((obj) => {
-//   const newProduct = new Product(obj.name, obj.description, obj.brand, obj.imageUrl, obj.price);
-//   fetch(endPoint, {
-//     method: "POST",
-//     body: JSON.stringify(newProduct),
-//     headers: {
-//       "Content-type": "application/json",
-//       Authorization: apiKey
-//     }
-//   })
-//     .then((response) => {
-//       if (response.ok) {
-//         // alert("Product correctly created.");
-//       } else {
-//         throw new Error("Fetch error!");
-//       }
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// });
