@@ -34,16 +34,20 @@ const getProductDetails = (product) => {
   productDetails.innerHTML = "";
   const imgCol = document.createElement("div");
   const detailsCol = document.createElement("div");
-  imgCol.classList.add("col-3", "text-center");
-  detailsCol.classList.add("col-9");
-  imgCol.innerHTML = `<img class="w-75" src="${product.imageUrl}" alt="${product.name}"/>`;
+  imgCol.classList.add("col-4", "text-center", "pt-5");
+  detailsCol.classList.add("col-8");
+  imgCol.innerHTML = `<img class="w-100" src="${product.imageUrl}" alt="${product.name}"/>`;
   detailsCol.innerHTML = `
-  <h1>${product.name}</h1>
-    <p class="fs-3 fw-medium"><span>Price: </span><span>${product.price.toFixed(2)}</span><span class="currency">$</span></p>
-    <dl>
-        <dt>Product description</dt>
-        <dd>${product.description}</dd>
-    </dl>`;
+  <h1 class="display-2 mb-0">${product.name}</h1>
+    <p class="display-5 fw-medium my-5"><span>Price: </span><span class="text-success">${product.price.toFixed(
+      2
+    )}</span><span class="text-success currency">$</span></p>
+    <div class="shadow-sm rounded-3">
+      <dl class="bg-light p-3 ">
+          <dt class="text-secondary border border-0 border-bottom border-tertiary mb-2">Product description</dt>
+          <dd class="mb-0">${product.description}</dd>
+      </dl>
+    </div>`;
   productDetails.appendChild(imgCol);
   productDetails.appendChild(detailsCol);
 };
