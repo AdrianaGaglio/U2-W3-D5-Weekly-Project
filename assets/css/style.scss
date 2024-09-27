@@ -1,0 +1,40 @@
+@import "../scss/functions";
+@import "../scss/variables";
+
+$new-primary: #3498db;
+$new-danger: #e74c3c;
+$new-success: #2ecc71;
+$new-warning: #f39c12;
+
+$new-theme-colors: (
+  "primary": $new-primary,
+  "success": $new-success,
+  "warning": $new-warning,
+  "danger": $new-danger
+);
+
+$theme-colors: map-merge($theme-colors, $new-theme-colors);
+
+$new-font-sizes: (
+  7: $font-size-base * 0.7
+);
+
+$font-sizes: map-merge($font-sizes, $new-font-sizes);
+
+$custom-widths: (80, 100, 150, 200, 250, 300);
+
+@each $width in $custom-widths {
+  .w-fixed-#{$width} {
+    width: #{$width}px !important;
+  }
+}
+
+$custom-heights: (30, 50, 100, 250);
+
+@each $height in $custom-heights {
+  .h-fixed-#{$height} {
+    height: #{$height}px !important;
+  }
+}
+
+@import "../scss/bootstrap";
