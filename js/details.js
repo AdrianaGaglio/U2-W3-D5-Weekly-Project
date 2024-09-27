@@ -34,16 +34,17 @@ const getProductDetails = (product) => {
   productDetails.innerHTML = "";
   const imgCol = document.createElement("div");
   const detailsCol = document.createElement("div");
-  imgCol.classList.add("col-4", "text-center", "pt-5");
-  detailsCol.classList.add("col-8");
+  imgCol.classList.add("col-12", "col-md-4", "text-center", "d-flex", "flex-column", "justify-content-center", "align-content-center");
+  detailsCol.classList.add("col-md-8");
   imgCol.innerHTML = `<img class="w-100" src="${product.imageUrl}" alt="${product.name}"/>`;
+  detailsCol.classList.add("d-flex", "flex-column", "justify-content-center");
   detailsCol.innerHTML = `
-  <h1 class="display-2 mb-0">${product.name}</h1>
-    <p class="display-5 fw-medium my-5"><span>Price: </span><span class="text-success">${product.price.toFixed(
+  <h1 class="display-4 fw-medium text-center">${product.name}</h1>
+    <p class="display-5 fw-medium mb-md-3 mb-lg-5 text-center"><span>Price: </span><span class="text-success">${product.price.toFixed(
       2
     )}</span><span class="text-success currency">$</span></p>
     <div class="shadow-sm rounded-3">
-      <dl class="bg-light p-3 ">
+      <dl class="bg-light p-3 mb-0">
           <dt class="text-secondary border border-0 border-bottom border-tertiary mb-2">Product description</dt>
           <dd class="mb-0">${product.description}</dd>
       </dl>
